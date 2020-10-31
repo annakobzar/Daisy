@@ -1,0 +1,78 @@
+.hexagon {
+  position: relative;
+  width: 60px;
+  height: 35px;
+  background-color: var(--red);
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+
+  // text-align: center;
+  // line-height: 90px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    left: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+  }
+
+  &::before {
+    bottom: 100%;
+    border-bottom: 18px solid var(--red);
+  }
+
+  &::after {
+    top: 100%;
+    width: 0;
+    border-top: 18px solid var(--red);
+  }
+
+  &--border {
+    @include size(100px, 60px);
+    border-left: solid 5px $lightred;
+    border-right: solid 5px $lightred;
+
+    &::before,
+    &::after {
+      @include size(70px);
+      transform: scaleY(0.5774) rotate(-45deg);
+      border: none;
+      background-color: inherit;
+      left: 10px;
+    }
+
+    &::before {
+      top: -35px;
+      bottom: auto;
+      border-top: solid 7px $lightred;
+      border-right: solid 7px $lightred;
+    }
+
+    &::after {
+      bottom: -35px;
+      top: auto;
+      border-bottom: solid 7px $lightred;
+      border-left: solid 7px $lightred;
+    }
+  }
+
+  &--text {
+    font-size: 35px;
+    font-weight: 800;
+    color: #0c252d;
+    text-align: center;
+  }
+
+  &__icon {
+    font-size: 45px;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+  }
+}

@@ -1,0 +1,132 @@
+.menu {
+  display: flex;
+
+  @media print {
+    display: none;
+  }
+
+  @media (max-width: $mobile) {
+    @include size(150px, 100%);
+    @include pos(fixed, $t: 0, $r: 0, $z: 99);
+
+    background-color: rgba(24, 24, 24, 0.8);
+    flex-direction: column;
+    padding-top: 30px;
+    transition: right 0.3s;
+  }
+
+  &__item {
+    margin-left: 50px;
+
+    @media (max-width: $mobile) {
+      margin-bottom: 25px;
+      margin-left: 35px;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 100;
+    position: relative;
+    transition: all 0.3s;
+
+    &:active {
+      color: var(--red);
+    }
+
+    @media (min-width: $mobile) {
+      &:hover {
+        color: var(--red);
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+
+    @media (max-width: $mobile) {
+      font-size: 19px;
+      font-weight: 300;
+    }
+
+    &::after {
+      @include size(0, 4px);
+      // @include pos($b: -10px, $l: 50%);
+      @include align(false, true, absolute);
+      bottom: -10px;
+      content: "";
+      background-color: var(--red);
+      transition: all 0.3s;
+    }
+  }
+}
+
+.burger-menu {
+  &__toggle {
+    display: none;
+
+    &:checked {
+      & ~ .menu {
+        right: -150px;
+      }
+
+      & ~ .burger-menu__label {
+        right: 15px;
+
+        .burger-menu__line {
+          display: block;
+        }
+        &::before {
+          transform: rotate(0);
+          top: -1px;
+        }
+
+        &::after {
+          transform: rotate(0);
+          bottom: 2px;
+        }
+      }
+    }
+  }
+
+  &__label {
+    @include size(40px, 35px);
+    @include pos(fixed, $t: 35px, $r: 165px, $z: 99);
+
+    transition: all 0.3s;
+
+    &::before,
+    &::after {
+      @include size(100%, 2px);
+      @include pos(absolute, $l: 0);
+
+      content: "";
+      background-color: #fff;
+      transition: all 0.3s;
+    }
+
+    &::before {
+      top: 17px;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      bottom: 16px;
+      transform: rotate(-45deg);
+    }
+
+    @media (min-width: $mobile) {
+      display: none;
+    }
+  }
+
+  &__line {
+    @include size(50%, 2px);
+    @include pos(absolute, $l: 0, $t: 16px);
+
+    background-color: #fff;
+    display: none;
+  }
+}
